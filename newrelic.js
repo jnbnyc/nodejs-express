@@ -43,7 +43,8 @@ exports.config = {
    */
   ignored_params: [],
   logging: {
-    level: 'error',
+    // this allows you to set both newrelic and loggly to the same level, or set them individually
+    level: process.env.NEW_RELIC_LOG_LEVEL || process.env.LOGLEVEL || "error",
     filepath: require('path').join(process.cwd(), 'newrelic_agent.log'),
     /**
      * Whether to write to a log file at all
