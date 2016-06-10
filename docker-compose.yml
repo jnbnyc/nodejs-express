@@ -1,0 +1,56 @@
+###  local development  ###
+local_dev:
+    image: node:6
+    working_dir: /root/nodejs-express
+    volumes:
+        - ./:/root/nodejs-express
+    ports:
+        - 80:3000
+    entrypoint:
+        - npm
+        - install
+        # - npm
+        # - run
+        # - start-local
+
+
+# ### simulate build and deploy after npm install  ###
+# server:
+#   build: .
+#   environment:
+#     # - NODE_ENV=development
+#     - LOGLEVEL=warn
+#     # - LOGGLY_LOGLEVEL=debug
+#     # - NEW_RELIC_LOG_LEVEL=info
+#     - NEW_RELIC_ENABLED=true
+#     - NEW_RELIC_LOG_ENABLED=false
+#     - NEW_RELIC_LICENSE_KEY=WU9VUl9ORVdfUkVMSUNfTElDRU5TRV9LRVk=
+#     - LOGGLY_TOKEN=WU9VUl9MT0dHTFlfVE9LRU4=
+#     - LOGGLY_SUBDOMAIN=your-subdomain
+#   working_dir: /root/nodejs-express
+
+
+# ###  mongodb integration  ###
+# nodejs-express:
+#     image: node:6
+#     working_dir: /root/nodejs-express
+#     environment:
+#         - NODE_ENV=development
+#         - MONGODB_ENDPOINT=mongo_db
+#         - NEW_RELIC_LOG_LEVEL=info
+#         - NEW_RELIC_LICENSE_KEY=WU9VUl9ORVdfUkVMSUNfTElDRU5TRV9LRVk=
+#         - LOGGLY_SUBDOMAIN=your-subdomain
+#         - LOGGLY_TOKEN=WU9VUl9MT0dHTFlfVE9LRU4=
+#     links:
+#         - mongo_db
+#     volumes:
+#         - ${PWD}:/root/nodejs-express
+#     ports:
+#         - 80:3000
+#     entrypoint:
+#         - npm
+#         - run
+#         - start-local
+
+# mongo_db:
+#     image: mongo:latest
