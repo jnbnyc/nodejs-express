@@ -1,17 +1,25 @@
 ###  local development  ###
 local_dev:
     image: node:6
+    environment:
+    - NODE_ENV=development
+    - LOGLEVEL=debug
+    - NEW_RELIC_ENABLED=true
+    - NEW_RELIC_LOG_ENABLED=false
+    - NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY}
+    - LOGGLY_TOKEN=${LOGGLY_TOKEN}
+    - LOGGLY_SUBDOMAIN=${LOGGLY_SUBDOMAIN}
     working_dir: /root/nodejs-express
     volumes:
         - ./:/root/nodejs-express
     ports:
         - 80:3000
     entrypoint:
-        - npm
-        - install
         # - npm
-        # - run
-        # - start-local
+        # - install
+        - npm
+        - run
+        - start-local
 
 
 # ### simulate build and deploy after npm install  ###
