@@ -11,7 +11,8 @@ This is for those intending to run a node container with the Express web framewo
 1.1 [NewRelic](https://docs.newrelic.com/docs/agents/nodejs-agent/installation-configuration/nodejs-agent-configuration), you can use your own api key and see the request results when running this container. This way, performance and uptime monitoring is easy to enable just by providing your key and setting NEW_RELIC_ENABLE to true.
 
 This [newrelic.js]() file sets up it's configuration via variables when required by app.js:
-    ```javascript
+
+```javascript
     exports.config = {
     app_name: [
       // npm adds this env var from the package.json
@@ -21,7 +22,7 @@ This [newrelic.js]() file sets up it's configuration via variables when required
     agent_enabled: process.env.NEW_RELIC_ENABLED || false,
 
     ...
-    ```
+```
 
 1.2 [Loggly](https://www.loggly.com/ultimate-guide/node-logging-basics/), again you can use your own key to enable. When disabled logging is still sent to stdout.
 
@@ -49,32 +50,31 @@ The [Twelve-Factor App]("http://12factor.net/") clearly documents the usefulness
 
   ... and the docker-compose.yml looks like:
 
-  ```yaml
-nodejs-express:
-    image: node:6
-    working_dir: /root/nodejs-express
-    environment:
-        - NODE_ENV=development
-        - MONGODB_ENDPOINT=mongo_db
-        - NEW_RELIC_LOG_LEVEL=info
-        - NEW_RELIC_LICENSE_KEY=WU9VUl9ORVdfUkVMSUNfTElDRU5TRV9LRVk=
-        - LOGGLY_SUBDOMAIN=your-subdomain
-        - LOGGLY_TOKEN=WU9VUl9MT0dHTFlfVE9LRU4=
-    links:
-        - mongo_db
-    volumes:
-        - ${PWD}:/root/nodejs-express
-    ports:
-        - 80:3000
-    entrypoint:
-        - npm
-        - run
-        - start-local
+```yaml
+    nodejs-express:
+        image: node:6
+        working_dir: /root/nodejs-express
+        environment:
+            - NODE_ENV=development
+            - MONGODB_ENDPOINT=mongo_db
+            - NEW_RELIC_LOG_LEVEL=info
+            - NEW_RELIC_LICENSE_KEY=WU9VUl9ORVdfUkVMSUNfTElDRU5TRV9LRVk=
+            - LOGGLY_SUBDOMAIN=your-subdomain
+            - LOGGLY_TOKEN=WU9VUl9MT0dHTFlfVE9LRU4=
+        links:
+            - mongo_db
+        volumes:
+            - ${PWD}:/root/nodejs-express
+        ports:
+            - 80:3000
+        entrypoint:
+            - npm
+            - run
+            - start-local
 
-mongo_db:
-    image: mongo:latest
-
-  ```
+    mongo_db:
+        image: mongo:latest
+```
 
 ## In Summary:
 
